@@ -4,6 +4,6 @@
       x
       false))
 
-(def multiples (filter number? (map div3or5? (range 1000))))
+(def multiples (filter div3or5? (range 1000)))
 
 (reduce + multiples)
