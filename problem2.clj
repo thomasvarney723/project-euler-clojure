@@ -6,10 +6,10 @@
 
 ;; (fib) copied from Clojure documentation :(
 (defn fib 
-  "takes an initial pair of numbers and creates a lazy sequence of fibonacci numbers"
+  "Takes an initial pair of numbers and creates a lazy sequence of fibonacci numbers."
   [a b] 
   (cons a (lazy-seq (fib b (+ b a)))))
 
-(reduce + (filter even? (take-while #(< % 4000000) (fib 1 2))))
+(reduce + (filter even? (take-while #(< % 4000000) (fib 55 89))))
 
 ;; Answer: 4613732
