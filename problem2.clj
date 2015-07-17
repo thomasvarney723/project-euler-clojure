@@ -6,7 +6,7 @@
 
 ;; (fib) copied from Clojure documentation :(
 (defn fib 
-  "takes an initial pair of numbers and creates a lazy sequenceof fibonacci numbers"
+  "takes an initial pair of numbers and creates a lazy sequence of fibonacci numbers"
   [a b] 
   (cons a (lazy-seq (fib b (+ b a)))))
 
