@@ -10,6 +10,6 @@
   [a b] 
   (cons a (lazy-seq (fib b (+ b a)))))
 
-(reduce + (filter even? (take-while #(< % 4000000) (fib 55 89))))
+(reduce + (filter even? (take-while #(< % 4000000) (fib 1 2))))
 
 ;; Answer: 4613732
