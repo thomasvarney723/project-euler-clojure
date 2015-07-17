@@ -4,18 +4,9 @@
 
 ; By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
-(def first-pair [1 2])
+;; (fib) copied from Clojure documentation :(
+(defn fib [a b] (cons a (lazy-seq (fib b (+ b a)))))
 
-;; Process:
-  ;; next-fib
-  ;; iterate next-fib
-  ;; take-while < 4000000
-  ;; filter even?
-  ;; reduce +
+(reduce + (filter even? (take-while #(< % 4000000) (fib 1 2))))
 
-(defn next-fib [pair]
-  (let [first (nth first-pair (- (count first-pair) 2))
-        second (last first-pair)]
-    (+ first second)))
-
-(reduce + (filter even? (into (sorted-set) (flatten (take 31 (iterate new-pair [1 2]))))))
+;; Answer: 4613732
