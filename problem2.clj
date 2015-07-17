@@ -5,7 +5,10 @@
 ; By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
 ;; (fib) copied from Clojure documentation :(
-(defn fib [a b] (cons a (lazy-seq (fib b (+ b a)))))
+(defn fib 
+  "takes an initial pair of numbers and creates a lazy sequenceof fibonacci numbers"
+  [a b] 
+  (cons a (lazy-seq (fib b (+ b a)))))
 
 (reduce + (filter even? (take-while #(< % 4000000) (fib 1 2))))
 
