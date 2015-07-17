@@ -4,8 +4,18 @@
 
 ; By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
-(loop [first 1
-       second 2]
-  (if (< second 4000000)
-    (recur second (+ first second))
-    second))
+(def first-pair [1 2])
+
+;; Process:
+  ;; next-fib
+  ;; iterate next-fib
+  ;; take-while < 4000000
+  ;; filter even?
+  ;; reduce +
+
+(defn next-fib [pair]
+  (let [first (nth first-pair (- (count first-pair) 2))
+        second (last first-pair)]
+    (+ first second)))
+
+(reduce + (filter even? (into (sorted-set) (flatten (take 31 (iterate new-pair [1 2]))))))
