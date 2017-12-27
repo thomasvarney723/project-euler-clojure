@@ -10,12 +10,12 @@
 (defn permutations
   ([n] (permutations 1 n))
   ([limit n]  ;; optional lower-limit for efficiency
-   (->> (for [x (range limit (inc n))
-              y (range limit (inc n))]
-          (* x y))
-        (sort-by identity >)  ;; sort in descending order
-        (filter palindrome?)
-        first)))
+   (let [factors (range limit (inc n))]
+     (->> (for [x factors y factors]
+            (* x y))
+          (sort-by identity >)  ;; sort in descending order
+          (filter palindrome?)
+          first))))
 
 ;; Answer: 906609
 ;; 993 * 913
