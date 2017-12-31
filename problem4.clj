@@ -4,18 +4,21 @@
 ;; Find the largest palindrome made from the product of two 3-digit numbers.
 
 (defn palindrome? [n]
-  (= (str n)
-     (clojure.string/reverse (str n))))
+  (let [s (str n)]
+    (= s (clojure.string/reverse (str n)))))
 
-(defn permutations
-  ([n] (permutations 1 n))
-  ([limit n]  ;; optional lower-limit for efficiency
-   (let [factors (range limit (inc n))]
-     (->> (for [x factors y factors]
-            (* x y))
-          (sort-by identity >)  ;; sort in descending order
-          (filter palindrome?)
-          first))))
+(defn max-palindrome-product
+  "Two-arity is buggy. (max-palindrome-product 920 999) ;=> 888888"
+  ([n] (max-palindrome-product 1 n))
+  ([lower-limit n]  ;; optional lower-limit for efficiency
+   (let [factors (range lower-limit (inc n))]
+     (->> (for [x factors y factors
+                :let [x*y (* x y)]
+                :when (palindrome? x*y)]
+            x*y)
+          (apply max)))))
+
+(max-palindrome-product 999) 
 
 ;; Answer: 906609
 ;; 993 * 913
@@ -24,4 +27,4 @@
 ;; order. I wasn't able to achieve this and don't know how to go about googling
 ;; for it. I suspect there's a mathematical term for it. For this reason
 ;; permutations takes an optional 'limit' that cuts the size of the search space.
-;; '(permutations 900 999)' returns the correct answer and is ~3000x faster.
+;; '(permutations 900 999)' returns the correct answer and is ~150x faster.
